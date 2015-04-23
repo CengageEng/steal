@@ -251,7 +251,7 @@ steal('steal',
                                     ");")
                             }
                             mapCode = "steal.packages(" + s.toJSON(maps) + ");"
-                            s.URI(destJS).save(filterCode(mapCode + makeCode.join('\n') + "\n" + pack.js, 'js'));
+                            s.URI(destJS).save(mapCode + makeCode.join('\n') + "\n" + pack.js); // s.URI(destJS).save(filterCode(mapCode + makeCode.join('\n') + "\n" + pack.js, 'js'));
                             if (pack.css) {
                                 s.print("         " + destCSS);
                                 s.URI(destCSS).save(filterCode(pack.css.code, 'css'));

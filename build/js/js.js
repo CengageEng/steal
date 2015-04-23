@@ -242,7 +242,7 @@ steal('steal','steal/build/css',function( steal ) {
 		
 		if(canCompressPackage){
 			jsCode = steal.build.js.clean(jsCode);
-			jsCode = steal.build.js.minify(jsCode,{currentLineMap: lineMap, compressor: buildOptions.compressor});
+			// jsCode = steal.build.js.minify(jsCode,{currentLineMap: lineMap, compressor: buildOptions.compressor});
 		}
 		
 		var csspackage = steal.build.css.makePackage(csses, cssPackage);
