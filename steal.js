@@ -2516,6 +2516,32 @@
                         steal.apply(null, dependencies.concat(factory));
                     }
                 }
+
+                h.win.defineWithQueryParams = function() {
+
+                    var dependencies, factory, module;
+                    for (var i = 0; i < arguments.length; i++) {
+                        var arg = arguments[i],
+                            type = typeof arg;
+                        if (type === 'function') {
+                            factory = arg;
+                        } else if (type === 'string') {
+                            module = arg;
+                        } else if (type === 'object' && arg.length) {
+                            dependencies = arg;
+                        }
+                    }
+
+                    if (module) {
+                        registerModule(modules, module, typeof factory === 'function' ? factory() : factory);
+                    } else {
+                        dependencies = dependencies || [];
+                        for (var i = 0; i < dependencies.length; i++) {
+                            dependencies[i] = st.amdIdToUri(dependencies[i]).path + "?" + st.amdIdToUri(dependencies[i]).query;
+                        }
+                        steal.apply(null, dependencies.concat(factory));
+                    }
+                }
                 /**
                  * @function window.require
                  * @hide
@@ -2532,6 +2558,10 @@
                  */
                 h.win.require = function(dependencies, method) {
                     h.win.define(dependencies, method);
+                }
+                // TODO: This is a patch for NG-31002 and should be cleaned up
+                h.win.requireWithQueryParams = function(dependencies, method) {
+                    h.win.defineWithQueryParams(dependencies, method);
                 }
                 h.win.define.amd = {
                     jQuery: true
