@@ -3182,7 +3182,7 @@
                             setTimeout(function() {
                                 st.popPending();
                                 go();
-                            }, 1000)
+                            }, 0)
                         } else {
                             // if we are in rhino, start loading dependencies right away
                             go()
