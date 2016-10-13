@@ -2511,7 +2511,12 @@
                     } else {
                         dependencies = dependencies || [];
                         for (var i = 0; i < dependencies.length; i++) {
-                            dependencies[i] = st.amdIdToUri(dependencies[i]).path;
+							var path = st.amdIdToUri(dependencies[i]).path;
+							var amdPluginIdentifierIndex = path.indexOf("!");
+							if (amdPluginIdentifierIndex !== -1) {
+								path = path.substring(amdPluginIdentifierIndex + 1);
+							}
+                            dependencies[i] = path;
                         }
                         steal.apply(null, dependencies.concat(factory));
                     }
